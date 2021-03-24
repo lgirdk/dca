@@ -181,10 +181,10 @@ int getProcUsage(char *processName) {
     if ((*pid) <= 0)
     {
         // pidof was empty, see if we can grab the pid via ps
-        sprintf(psCommand, "ps | grep %s | grep -v grep | awk '{ print $1 }'", processName);
+        sprintf(psCommand, "busybox ps | grep %s | grep -v grep | awk '{ print $1 }'", processName);
 
 #ifdef LIBSYSWRAPPER_BUILD
-        if (!(cmdPid = v_secure_popen("r", "ps | grep %s | grep -v grep | awk '{ print $1 }'", processName)))
+        if (!(cmdPid = v_secure_popen("r", "busybox ps | grep %s | grep -v grep | awk '{ print $1 }'", processName)))
 #else
         if (!(cmdPid = popen(psCommand, "r")))
 #endif
